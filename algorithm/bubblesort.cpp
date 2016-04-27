@@ -1,6 +1,13 @@
 #include <iostream>
 using namespace std;
-
+/*
+bubble sort is about doing swaps
+loop from left to right
+compare every pair from left to right
+swap if left>right, so after one loop,
+the rightmost one is the largest,
+then repeat the loop from left to right-1 and so on
+*/
 
 int main()
 {

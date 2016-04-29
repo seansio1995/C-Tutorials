@@ -2,6 +2,7 @@ package linkedlist;
 
 public class LinkedList {
 	private Node head;
+	private Node tail;
 	//private Node tail;
 	public void insertAtHead(int data)
 	{
@@ -10,10 +11,27 @@ public class LinkedList {
 		this.head=newNode;
 	}
 	
+	public void insertAtTail(int data)
+	{
+		Node newNode=new Node(data);
+		if(head==null)
+		{
+			this.head=newNode;
+			this.tail=newNode;
+		}
+		else
+		{
+			this.tail.setNextNode(newNode);
+			this.tail=newNode;
+		}
+	}
+	
 	public void deleteFromHead()
 	{
 		this.head=this.head.getNextNode();
 	}
+	
+	
 	
 	public Node find(int data)
 	{

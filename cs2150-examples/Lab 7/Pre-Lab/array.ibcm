@@ -1,0 +1,35 @@
+C00D	00				jmp		start
+0003	01		size	dw		3			size of array=3
+0001	02		one		dw		1		
+0000	03		i		dw		0			int i
+0000	04		s		dw		0			int s
+000A	05		a		dw		0			int a[]
+0000	06		zero	dw		0			
+3000	07		ldit	dw		3000
+0000	08		temp	dw		0
+0000	09		max		dw		0
+0001	0A		a[0]	dw		1			a[0]=1
+0004	0B		a[1]	dw		2			a[1]=3
+0006	0C		a[2]	dw		4			a[2]=4
+3001	0D		start	load	size		acc=size
+6003	0E				sub		i			subtract i from acc
+E020	0F				jmpl	end			if i>size go to the end
+D020    10				jmpe	end			if i=size
+3007	11				load	ldit		form instruction load a[i]
+5005	12				add		a[]			add the base value of a
+5003	13				add		i			add i (location in array) to base	
+4015    14				store	doit		plant the instruction into the program
+0000	15		doit	dw		0			
+4008	16				store	temp		stores value into temp (tempt=a[i])
+6009	17				sub		max			a[i]-max
+E01C	18				jmpl	endl		if max>=a[i] go to end of the loop
+D01C	19				jmpe	endl
+3008	1A				load	temp		set accumulator to temp
+4009	1B				store	max			set max to acc value (temp)
+3003	1C		endl	load	i			end loop and load i to acc
+5002	1D				add		1			i++
+4003	1E				store	i			store i and start loop again
+C00D	1F				jmp		start       start loop again
+3009	20		end		load	max			set acc to max
+1800	21				printH	max			print max
+0000	22				halt

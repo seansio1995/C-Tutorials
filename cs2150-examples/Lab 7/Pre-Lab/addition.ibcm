@@ -1,0 +1,29 @@
+C009		00				jmp			start	jump over variables
+0000		01	int x		dw			0		int x
+0000		02	int y		dw			0		int y
+0000		03	int z		dw			0		int z
+0001		04	one			dw			1		
+0000		05	zero		dw			0		
+0000		06	sum			dw			0		int s
+0000		07									extra space
+0000		08
+1000		09	start		readH				read x
+4001		0A				store		x		store x
+1000		0B				readH				read y
+4002		0C				store		y		store y
+1000		0D				readH				read z
+4003		0E				store		z		store z
+3006		0F				load		sum		accumulator=sum 
+5001		10				add x				add x to accumulator
+5002		11				add y				add y to accumulator
+5003		12				add z				add z to accumulator
+1800		13				printH				prints the sum
+D016		14				jmpe		end		jumps to end if acc=0
+C009		15				jmp			start	Tries again if acc!=0
+3001		16				load		x		load/print x
+1800		17				printH		
+3002		18				load		y		load/print y
+1800		19				printH				
+3003		1A				load		z		load/print z
+1800		1B				printH		
+0000		1C				halt

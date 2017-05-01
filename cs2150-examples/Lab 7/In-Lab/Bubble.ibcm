@@ -1,0 +1,68 @@
+c012	00				jmp		start	skip variables
+0004	01		max		dw		4		max=4
+0003	02		a[]		dw				pointer to a[] start
+0009	03		a0		dw		1		a0=1
+0002	04		a1		dw		5		a1=5
+0007	05		a2		dw		3		a2=3
+0005	06		a3		dw		9		a3=9
+0000	07		temp	dw		0		temp variable
+0000	08		i		dw		0		initialize i=0
+0003	09		j		dw		3		j=max-1=3
+0001	0A		one		dw		1		one
+3000	0B		ldit	dw		3000	load helper
+0000	0C		temp	dw		0		current spot
+0000	0D		prev	dw		0		previous spot
+4000	0E		sdit	dw		4000	store function helper
+0000	0F		zero	dw		0	
+0000	10								extra space
+0000	11
+3001	12		start	load	max		while(i<max)
+6008	13				sub		i		continue if max-i>=0
+D043	14				jmpe	exit
+E043	15				jmpl	exit
+3009	16				load	j		while(j>i)
+6008	17				sub		i		continue if j-i>=0
+D03c	18				jmpe	endl2	
+E03c	19				jmpl	exit2	
+300B	1A				load	ldit	form instruction load a[j]
+5002	1B				add		a[]
+5009	1C				add		j		memory location a[j]
+401e	1D				store	doit1	plant instruction
+0000	1e		doit1	dw		0
+400c	1f				store	temp	a[j]=temp
+300B	20				load	ldit	form instruction load a[j-1]
+5002	21				add		a[]
+5009	22				add		j		memory location a[j]
+600A	23				sub		one		a[j-1]
+4025	24				store	doit2	plant instruction
+0000	25		doit2	dw		0
+400d	26				store	prev	a[j-1]=prev
+300c	27				load	temp	if(a[j]>a[j-1])
+600d	28				sub		prev	a[j]-a[j-1]
+E02b	29				jmpl	endl    continue if a[j]-a[j-1]>0
+c038	2A		endl	jmp		endl	
+300E	2B				load	sdit	a[j]=prev to swap
+5002	2C				add		a[]
+5009	2D				add		j		memory location a[j]
+4030	2E				store	doit3	plant instruction
+300d	2F				load	prev	//
+0000	30		doit3	dw		0
+300E	31				load	sdit	a[j-1]=temp
+5002	32				add		a[]      
+5009	33				add		j		
+600a	34				sub		one		memory location a[j-1]
+4037	35				store	doit4	plant instruction
+300c	36				load 	temp
+0000	37		doit4	dw		0
+3009	38		endl	load	j		j--
+600a	39				sub		one		
+4009	3A				store	j		j--
+C016	3B				jmp		loop	jump back into j's loop
+3008	3C		exit2	load	i		i++
+500a	3D				add		one		
+4008	3E				store	i		i++
+3001	3F				load	max		j
+600A	40				sub		one		max-1=j, reset
+4009	41				store	j
+c012	42				jmp		loop	go back to start or i's loop w/ new values
+0000	43				halt

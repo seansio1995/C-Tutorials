@@ -1,0 +1,22 @@
+3000	00		load	load		ldit		load 3000 into accumulator
+1800	01				printH		print		print first line
+5012	02				add			one			loads 3001 into accumulator
+4013	03				store		temp		puts address into temp holder
+4005	04				store		doit		plant instruction
+0000	05		doit	dw			0			
+1800	06				printH		print		print memory at that address
+3015	07				load		counter		count++
+5012	08				add			one			
+4015	09				store		counter		store count++
+6014	0A				sub			size		continue if count-size<0
+D00F	0B				jmpe
+E00D	0C				jmpl					else, jump to the end
+3013	0D				load		temp		load original value bf printing
+C002	0E				jmp			00			loop back to beginning
+3012	0F				load		one			reset counter for next run
+4015	10				store		counter		
+1800	11				printH		print		print counter/End Program
+0001	12				one			dw			one
+0000	13				temp		dw			temp holder for value
+0015	14				size		dw			length of program
+0001	15				counter		dw			counter

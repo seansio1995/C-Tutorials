@@ -7,10 +7,11 @@ int main()
 	a=10;
 	b=20;
 
-	int tmp; //tmp container
+	int* tmp; //tmp container
 	cout<<"Addrs now:"<<endl;
 	cout<<"a addr: "<<&a<<endl;
 	cout<<"b addr: "<<&b<<endl;
+	cout<<"a: "<<a<<" b: "<<b<<endl;
 
 	tmp=a;
 	a=b;
@@ -19,5 +20,6 @@ int main()
 	cout<<endl<<"Addrs after:"<<endl;
 	cout<<"a addr: "<<&a<<endl;
 	cout<<"b addr: "<<&b<<endl;
+	cout<<"a: "<<a<<" b: "<<b<<endl;
 	return 0;
 }
